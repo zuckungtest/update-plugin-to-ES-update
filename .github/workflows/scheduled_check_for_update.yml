@@ -1,4 +1,4 @@
-name: (scheduled) create html
+name: (scheduled) check for update
 on: 
   schedule: 
     - cron: '00 * * * *' 
