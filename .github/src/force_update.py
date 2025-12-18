@@ -56,7 +56,7 @@ def decide_update(vpath, vapi, vchangelog):
 
 def download(version, vpath, vzip):
 	# downloading zip
-	if vpath == 'tmp/release/':
+	if vpath == '.github/tmp/release/':
 		vzip = vzip.replace('0.10.10', version)
 	print('  downloading now')
 	request = requests.get(vzip, allow_redirects=True, timeout=30)
@@ -72,7 +72,7 @@ def unpack(version, vpath, lastmodifiedO):
 	# unpacking
 	for file in archive.namelist():
 		# if release
-		if vpath == 'tmp/release/':
+		if vpath == '.github/tmp/release/':
 			if file.startswith('data/') or file.startswith('images/'):
 				archive.extract(file, vpath)
 	os.remove(vpath + version + '.zip')
