@@ -93,7 +93,7 @@ def remove_asteroids(data_folder, targetfile):
 			targetfile.writelines(line)
 
 def run():
-	data_folder = 'tmp/release/data/'
+	data_folder = '.github/tmp/release/data/'
 	objs, obj_paths, obj_names = read_everything(data_folder)
 	# too.many.asteroids
 	try:

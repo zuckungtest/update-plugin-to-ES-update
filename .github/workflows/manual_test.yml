@@ -15,11 +15,11 @@ jobs:
       - name: Disable Python cache
         run: export PYTHONDONTWRITEBYTECODE=1
       - name: check for updates
-        run: python3 res/src/force_update.py
+        run: python3 .github/src/force_update.py
       - name: create plugins
-        run: python3 res/src/create_plugins.py
+        run: python3 .github/src/create_plugins.py
       - name: delete downloaded files
-        run: python3 res/src/delete_downloaded.py
+        run: python3 .github/src/delete_downloaded.py
       - name: Commit file
         run: |
           git config --global user.name "zuckung"

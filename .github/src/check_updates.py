@@ -82,7 +82,7 @@ def unpack(version, vpath, lastmodifiedO):
 def run():
 	# checking for Release update
 	print('[release version]')
-	vRpath = 'tmp/release/'
+	vRpath = '.github/tmp/release/'
 	vRapi = 'https://api.github.com/repos/endless-sky/endless-sky/commits?path=changelog&page=1&per_page=1'
 	vRchangelog = 'https://github.com/endless-sky/endless-sky/raw/refs/heads/master/changelog'
 	vRzip = 'https://github.com/endless-sky/endless-sky/releases/download/v0.10.10/EndlessSky-win64-v0.10.10.zip' # 0.10.10 will be replaced with current version	
