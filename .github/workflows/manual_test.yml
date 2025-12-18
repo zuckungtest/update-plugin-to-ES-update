@@ -24,7 +24,7 @@ jobs:
         run: |
           git config --global user.name "zuckung"
           git config --global user.email "zuckung@gmx.de"
-          git add "tmp/"
+          git add "plugins/"
           git diff-index --quiet HEAD || git commit -m "Initiated test"
       - name: Push changes
         uses: ad-m/github-push-action@master
