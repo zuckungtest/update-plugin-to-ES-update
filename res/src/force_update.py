@@ -69,57 +69,12 @@ def unpack(version, vpath, lastmodifiedO):
 	# modifying index.html
 	print('  unpacking zip')
 	archive = zipfile.ZipFile(vpath + version + '.zip')
-	# if release
-	if vpath == 'tmp/release/':
-		with open('page/index.html', 'r') as source: # writing version to page/index.html
-			lines = source.readlines()
-		with open('page/index.html', 'w') as target:
-			for line in lines:
-				if line.find('release/index') > 0:
-					line = '<td style="width:200px"><a href="release/index.html" style="color: #80808;">release (' + version + ')</a></td>\n'
-				elif line.find('release update') > 0:
-					line = '<td style="font-size:11px;">release update: <br>[' + str(lastmodifiedO).split(' ')[0] + ']</td>\n'
-				target.write(line)
-	# if android
-	#if vpath == 'tmp/android/':
-	#	with open('page/index.html', 'r') as source: # writing version to page/index.html
-	#		lines = source.readlines()
-	#	with open('page/index.html', 'w') as target:
-	#		for line in lines:
-	#			if line.find('android/index') > 0:
-	#				line = '<td style="width:200px"><a href="android/index.html" style="color: #80808;">android (' + version + ')</a></td>\n'
-	#			elif line.find('android update') > 0:
-	#				line = '<td style="font-size:11px;">android update: <br>[' + str(lastmodifiedO).split(' ')[0] + ']</td>\n'
-	#			target.write(line)
-	# if continuous
-	#if vpath == 'tmp/continuous/':
-	#	with open('page/index.html', 'r') as source: # writing version to page/index.html
-	#		lines = source.readlines()
-	#	with open('page/index.html', 'w') as target:
-	#		for line in lines:
-	#			if line.find('continuous/index') > 0:
-	#				line = '<td style="width:200px"><a href="continuous/index.html" style="color: #808080;">continuous (' + version + ' +)</a></td>\n'
-	#			elif line.find('continuous update') > 0:
-	#				line = '<td style="font-size:11px;">continuous update: <br>[' + str(lastmodifiedO).split(' ')[0] + ']</td>\n'
-	#			target.write(line)		
 	# unpacking
 	for file in archive.namelist():
 		# if release
 		if vpath == 'tmp/release/':
 			if file.startswith('data/') or file.startswith('images/'):
 				archive.extract(file, vpath)
-		# if android				
-		#elif vpath == 'tmp/android/':
-		#	if file.startswith('endless-mobile-android/data/') or file.startswith('endless-mobile-android/images/'):
-		#		archive.extract(file, vpath)
-		#		shutil.copytree('tmp/android/endless-mobile-android/', 'tmp/android/', dirs_exist_ok=True)
-		#		shutil.rmtree('tmp/android/endless-mobile-android/')
-		# if continuous
-		#elif vpath == 'tmp/continuous/':
-		#	if file.startswith('endless-sky-master/data/') or file.startswith('endless-sky-master/images/'):
-		#		archive.extract(file, vpath)
-		#		shutil.copytree('tmp/continuous/endless-sky-master/', 'tmp/continuous/', dirs_exist_ok=True)
-		#		shutil.rmtree('tmp/continuous/endless-sky-master/')
 	os.remove(vpath + version + '.zip')
 	print('    unpacking done')
 
@@ -135,35 +90,6 @@ def run():
 	download(version, vRpath, vRzip)
 	unpack(version, vRpath, lastmodifiedO)
 	print('  DONE')
-	#print('')
-	# checking for Android update
-	#print('[android version]')
-	#vApath = 'tmp/android/'
-	#vAapi = 'https://api.github.com/repos/thewierdnut/endless-mobile/commits?path=changelog&page=1&per_page=1'
-	#vAchangelog = 'https://github.com/thewierdnut/endless-mobile/raw/refs/heads/android/changelog'
-	#vAzip = 'https://github.com/thewierdnut/endless-mobile/archive/refs/heads/android.zip'	
-	#update, version, lastmodifiedO = decide_update(vApath, vAapi, vAchangelog)
-	#if update == True:
-	#	download(version, vApath, vAzip)
-	#	unpack(version, vApath, lastmodifiedO)
-	#	print('  DONE')
-	#else:
-	#	print('  ABORTING')
-	#print('')
-	# checking for Continous update
-	#print('[continuous version]')
-	#vCpath = 'tmp/continuous/'
-	#vCapi = 'https://api.github.com/repos/endless-sky/endless-sky/commits?path=changelog&page=1&per_page=1'
-	#vCchangelog = 'https://github.com/endless-sky/endless-sky/raw/refs/heads/master/changelog'
-	#vCzip = 'https://github.com/endless-sky/endless-sky/archive/refs/heads/master.zip'
-	#update, version, lastmodifiedO = decide_update(vCpath, vCapi, vCchangelog)
-	#if update == True:
-	#	download(version, vCpath, vCzip)
-	#	unpack(version, vCpath, lastmodifiedO)
-	#	print('  DONE')
-	#else:
-	#	print('  ABORTING')
-	#print('')
 
 
 if __name__ == "__main__":

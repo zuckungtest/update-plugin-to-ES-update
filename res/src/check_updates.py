@@ -69,6 +69,12 @@ def unpack(version, vpath, lastmodifiedO):
 	# modifying index.html
 	print('  unpacking zip')
 	archive = zipfile.ZipFile(vpath + version + '.zip')
+	# unpacking
+	for file in archive.namelist():
+		# if release
+		if vpath == 'tmp/release/':
+			if file.startswith('data/') or file.startswith('images/'):
+				archive.extract(file, vpath)
 	os.remove(vpath + version + '.zip')
 	print('    unpacking done')
 
@@ -87,35 +93,6 @@ def run():
 		print('  DONE')
 	else:
 		print('  ABORTING')
-	#print('')
-	# checking for Android update
-	#print('[android version]')
-	#vApath = 'tmp/android/'
-	#vAapi = 'https://api.github.com/repos/thewierdnut/endless-mobile/commits?path=changelog&page=1&per_page=1'
-	#vAchangelog = 'https://github.com/thewierdnut/endless-mobile/raw/refs/heads/android/changelog'
-	#vAzip = 'https://github.com/thewierdnut/endless-mobile/archive/refs/heads/android.zip'	
-	#update, version, lastmodifiedO = decide_update(vApath, vAapi, vAchangelog)
-	#if update == True:
-	#	download(version, vApath, vAzip)
-	#	unpack(version, vApath, lastmodifiedO)
-	#	print('  DONE')
-	#else:
-	#	print('  ABORTING')
-	#print('')
-	# checking for Continous update
-	#print('[continuous version]')
-	#vCpath = 'tmp/continuous/'
-	#vCapi = 'https://api.github.com/repos/endless-sky/endless-sky/commits?path=changelog&page=1&per_page=1'
-	#vCchangelog = 'https://github.com/endless-sky/endless-sky/raw/refs/heads/master/changelog'
-	#vCzip = 'https://github.com/endless-sky/endless-sky/archive/refs/heads/master.zip'
-	#update, version, lastmodifiedO = decide_update(vCpath, vCapi, vCchangelog)
-	#if update == True:
-	#	download(version, vCpath, vCzip)
-	#	unpack(version, vCpath, lastmodifiedO)
-	#	print('  DONE')
-	#else:
-	#	print('  ABORTING')
-	#print('')
 
 
 if __name__ == "__main__":
