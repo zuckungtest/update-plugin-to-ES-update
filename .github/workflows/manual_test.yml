@@ -1,0 +1,33 @@
+name: (manual) create plugins
+on: 
+  workflow_dispatch:
+
+jobs:
+  zip-files:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Disable Python cache
+        run: export PYTHONDONTWRITEBYTECODE=1
+      - name: check for updates
+        run: python3 res/src/check_updates.py #change to always download
+      - name: create plugins
+        run: python3 res/src/create_plugins.py
+      - name: delete downloaded files
+        run: python3 res/src/delete_downloaded.py
+      - name: Commit file
+        run: |
+          git config --global user.name "zuckung"
+          git config --global user.email "zuckung@gmx.de"
+          git add "tmp/"
+          git diff-index --quiet HEAD || git commit -m "Initiated test"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
