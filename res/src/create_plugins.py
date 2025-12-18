@@ -93,7 +93,7 @@ def remove_asteroids(data_folder, targetfile):
 			targetfile.writelines(line)
 
 def run():
-	data_folder = '/storage/9C33-6BBD/endless sky/data/'
+	data_folder = 'tmp/release/data/'
 	objs, obj_paths, obj_names = read_everything(data_folder)
 	# too.many.asteroids
 	try:
