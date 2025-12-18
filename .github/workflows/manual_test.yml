@@ -15,7 +15,7 @@ jobs:
       - name: Disable Python cache
         run: export PYTHONDONTWRITEBYTECODE=1
       - name: check for updates
-        run: python3 res/src/force update.py #change to always download
+        run: python3 res/src/force_update.py
       - name: create plugins
         run: python3 res/src/create_plugins.py
       - name: delete downloaded files
