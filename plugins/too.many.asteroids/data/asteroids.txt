@@ -1,4 +1,5 @@
-# blub
+# number of systems: 699
+# number of asteroid entries: 3149
 
 system "1 Axis"
 	remove asteroids "small rock"
