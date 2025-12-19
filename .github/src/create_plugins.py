@@ -94,14 +94,15 @@ def remove_asteroids(data_folder, targetfile):
 
 def run():
 	data_folder = '.github/tmp/release/data/'
-	objs, obj_paths, obj_names = read_everything(data_folder)
-	# too.many.asteroids
-	try:
-		remove_asteroids(data_folder, 'plugins/too.many.asteroids/data/asteroids.txt')
-	except:
-		print('failed to create too.many.asteroids')
-	else:
-		print('successfully created too.many.asteroids')
+	if os.path.isdir(data_folder):
+		objs, obj_paths, obj_names = read_everything(data_folder)
+		# too.many.asteroids
+		try:
+			remove_asteroids(data_folder, 'plugins/too.many.asteroids/data/asteroids.txt')
+		except:
+			print('failed to create too.many.asteroids')
+		else:
+			print('successfully created too.many.asteroids')
 
 
 if __name__ == "__main__":
